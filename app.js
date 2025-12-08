@@ -10,3 +10,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
     },2000);
   },2000);
 });
+// Disable right-click
+document.addEventListener('contextmenu', event => event.preventDefault());
