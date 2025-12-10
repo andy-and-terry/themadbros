@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     setTimeout(()=>{
       splash.style.display="none";
       main.style.opacity="1";
-    },2000);
-  },2000);
+    },5000);
+  },5000);
 });
 // Disable right-click
 document.addEventListener('contextmenu', event => event.preventDefault());
