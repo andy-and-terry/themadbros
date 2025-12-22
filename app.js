@@ -1,3 +1,12 @@
+let warned = false;
+
+window.addEventListener("scroll", () => {
+    if (!warned) {
+        alert("Loading… please don’t scroll yet 🙂");
+        warned = true;
+    }
+});
+
 document.addEventListener("DOMContentLoaded", ()=>{
   const splash = document.getElementById("splash");
   const main = document.getElementById("main-content");
