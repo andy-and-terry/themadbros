@@ -1,0 +1,11 @@
+{
+  "title": "Robot Arm Simulator",
+  "author": "Noah",
+  "url": "https://example.com",
+  "thumbnail": "https://via.placeholder.com/400x200",
+  "description": "A web-based robotic arm simulator.",
+  "tags": [
+    "robot",
+    "code"
+  ]
+}
