@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TMB Movies · The Mad Bros</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== RESET ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ===== SPLASH ===== */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 999;
+  animation: splashOut 1s ease forwards;
+  animation-delay: 2.5s;
+}
+
+#splash h1 {
+  font-size: 3rem;
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+#splash p {
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+@keyframes splashOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ===== MAIN SITE ===== */
+#site {
+  padding: 30px;
+  opacity: 0;
+  animation: siteIn 1s ease forwards;
+  animation-delay: 3s;
+}
+
+@keyframes siteIn {
+  to { opacity: 1; }
+}
+
+/* ===== HEADER ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #222;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+  opacity: 0.8;
+}
+nav a:hover {
+  opacity: 1;
+  color: #ff0000;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  margin-bottom: 50px;
+}
+
+h2 {
+  color: #ff0000;
+  margin-bottom: 10px;
+}
+
+.movie {
+  border: 1px solid #222;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 1px solid #222;
+  padding-top: 15px;
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+<div id="splash">
+  <div>
+    <p>The Mad Bros presents</p>
+    <h1>TMB Movies</h1>
+    <p>Movies Division</p>
+  </div>
+</div>
+
+<div id="site">
+
+<header>
+  <h1>TMB Movies</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#trailers">Trailers</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section id="home">
+  <h2>Welcome</h2>
+  <p>
+    TMB Movies is the movie-making division of The Mad Bros.
+    We create fun, kid-friendly films packed with mystery, creativity,
+    and big ideas. If you are looking for the movie download link, please
+   <a href="https://forms.gle/GdppALbBzfFnCC1d6">fill in this form here</a>
+</section>
+
+<section id="trailers">
+  <h2>Trailers</h2>
+
+  <div class="movie">
+    <strong>Detective Case #1: The Stolen Rock</strong>
+    <p>Trailer out! <a href="https://drive.google.com/file/d/1h8qNHr3TIHM7HafaW9krQOK2FLZ_reIY/view?usp=drive_link">Trailer here</a></p>
+    <p><em>Credits:
+    Voice of Earth by Alex-Productions | https://onsound.eu/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+ </em></p>
+  <p>Episode 1 comes out in 1/3/2026</p>
+    <hr>
+    <strong>What Windows Hides From its Average User</strong>
+    <p>Trailer out! <a href="https://drive.google.com/file/d/1HHw1wHeA0W4gMn6AkvviKtJB6HC7_3NW/view?usp=drive_link">Trailer here</a></p>
+    <p>Episode 1 comes out in 1/8/2026</p>
+    <hr>
+    <strong>The Runaway Ball</strong>
+    <p>Trailer out! <a href="https://drive.google.com/file/d/1gLhcGVwoFtByV4Zmml-k1CgnvgbdmnRU/view?usp=drive_link">Trailer here</a></p>
+    <p>Episode 1 comes out in 1/2/2026</p>
+    <hr>
+    <strong>The Flood</strong>
+    <p>Trailer uploading...</p>
+    <p>Episode 1 comes out in 1/8/2026</p>
+    <hr>
+    <strong>The playhouse</strong>
+    <p><em>Note: this movie does not have a trailer</em></p>
+    <p>Episode 1 OUT!</p>
+    <p>Episode 2 OUT!</p>
+  </div>
+
+  <hr>
+  <strong>Note: Movies are normally 5-10 minute short clips. Vote on our website to increase the to 30-60 minute films.</strong>
+</section>
+
+<section id="about">
+  <h2>About</h2>
+  <p>
+    The Mad Bros is a creative company with multiple branches.
+    TMB Movies focuses on storytelling through short films and trailers.
+    <a href="https://andy-and-terry.github.io/themadbros/">The Mad Bros' Main site</a>
+  </p>
+</section>
+
+<footer>
+  © The Mad Bros · TMB Movies Division
+</footer>
+
+</div>
+
+<script>
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+});
+</script>
+
+</body>
+</html>
