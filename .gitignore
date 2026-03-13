@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Test coverage output
+coverage/
+
+# OS / editor artefacts
+.DS_Store
+Thumbs.db
