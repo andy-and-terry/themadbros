@@ -11,6 +11,40 @@
  *  - Missing optional fields (e.g. `tags`): handled with safe fallbacks.
  */
 
+/**
+ * Escapes special HTML characters in a string to prevent XSS injection
+ * when inserting untrusted values into innerHTML.
+ *
+ * @param {string} str - Raw string that may contain HTML special characters.
+ * @returns {string}   - HTML-escaped string safe for use inside innerHTML.
+ */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
+ * Returns the URL only if it uses the http or https protocol,
+ * otherwise returns an empty string to prevent javascript: URLs.
+ *
+ * @param {string} url - URL from project data.
+ * @returns {string}   - Validated URL or empty string.
+ */
+function safeUrl(url) {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:"
+      ? url
+      : "";
+  } catch {
+    return "";
+  }
+}
+
 const params = new URLSearchParams(window.location.search);
 const file = params.get("file");
 
@@ -28,20 +62,22 @@ if (!file) {
     .then((project) => {
       // Guard against missing tags array to prevent a runtime crash.
       const tagsText = Array.isArray(project.tags)
-        ? project.tags.join(", ")
+        ? project.tags.map(escapeHtml).join(", ")
         : "None";
 
+      const projectUrl = safeUrl(project.url);
+
       document.getElementById("project").innerHTML = `
-        <h1>${project.title}</h1>
-        <p><b>By:</b> ${project.author}</p>
-        <iframe src="${project.url}" width="100%" height="600" title="${project.title}"></iframe>
-        <p>${project.description}</p>
+        <h1>${escapeHtml(project.title)}</h1>
+        <p><b>By:</b> ${escapeHtml(project.author)}</p>
+        <iframe src="${escapeHtml(projectUrl)}" width="100%" height="600" title="${escapeHtml(project.title)}"></iframe>
+        <p>${escapeHtml(project.description)}</p>
         <p><b>Tags:</b> ${tagsText}</p>
-        <a href="${project.url}" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+        <a href="${escapeHtml(projectUrl)}" target="_blank" rel="noopener noreferrer">Open in new tab</a>
       `;
     })
     .catch((err) => {
       document.getElementById("project").innerHTML =
-        `<p>Failed to load project: ${err.message}</p>`;
+        `<p>Failed to load project: ${escapeHtml(err.message)}</p>`;
     });
 }

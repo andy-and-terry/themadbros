@@ -11,8 +11,8 @@
 // ---------------------------------------------------------------------------
 
 /**
- * Resets the DOM, sets the page URL, mocks fetch, then evaluates
- * viewProject.js so its top-level code runs with the desired context.
+ * Resets the DOM, configures window.location.search via Object.defineProperty,
+ * mocks fetch, then evaluates viewProject.js so its top-level code runs.
  *
  * @param {string}   search     - Query string, e.g. "?file=project1.json"
  * @param {Function} fetchMock  - Jest mock for global.fetch
@@ -22,9 +22,13 @@ async function setup(search, fetchMock) {
   // Set up a minimal DOM with the element the module writes into.
   document.body.innerHTML = '<div id="project"></div>';
 
-  // Replace window.location so window.location.search returns our value.
-  delete window.location;
-  window.location = { search };
+  // Use Object.defineProperty to safely override window.location.search
+  // without deleting the global location object (which is fragile in jsdom).
+  Object.defineProperty(window, "location", {
+    value: { search },
+    writable: true,
+    configurable: true,
+  });
 
   // Inject the fetch mock.
   global.fetch = fetchMock;
@@ -108,5 +112,27 @@ describe("viewProject.js", () => {
     const html = document.getElementById("project").innerHTML;
     expect(html).toContain("No Tags");
     expect(html).toContain("<b>Tags:</b> None");
+  });
+
+  test("strips javascript: URLs from project.url to prevent XSS", async () => {
+    const mockProject = {
+      title: "XSS Test",
+      author: "Attacker",
+      url: "javascript:alert(1)",
+      description: "Malicious project.",
+      tags: [],
+    };
+
+    const fetchMock = jest.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockProject),
+    });
+
+    await setup("?file=xss.json", fetchMock);
+
+    const html = document.getElementById("project").innerHTML;
+    // The dangerous URL must not appear unescaped in any attribute.
+    expect(html).not.toContain('src="javascript:');
+    expect(html).not.toContain('href="javascript:');
   });
 });
