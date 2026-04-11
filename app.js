@@ -1,20 +1,3 @@
-// Flag to ensure the scroll warning is only shown once
-let warned = false;
-
-// Warn users not to scroll while the splash screen is loading.
-// Once warned, the flag prevents the alert from firing again.
-window.addEventListener("scroll", () => {
-  if (!warned) {
-    alert("Loading… please don't scroll yet 🙂");
-    warned = true;
-  }
-});
-
-// Wait for the full HTML document to load before running splash logic
-document.addEventListener("DOMContentLoaded", () => {
-  const splash = document.getElementById("splash");
-  const main = document.getElementById("main-content");
-
   // After 5 seconds, begin fading out the splash screen.
   // The "fade-out" class triggers the CSS opacity transition defined in style.css.
   setTimeout(() => {
