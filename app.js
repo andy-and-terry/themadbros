@@ -10,7 +10,7 @@
       main.style.opacity = "1";
     }, 2000); // matches the `transition: opacity 2s ease` on #splash in style.css
   }, 5000); // wait 5 seconds before starting the fade
-);
+};
 
 // Disable the right-click context menu to discourage easy asset copying
 document.addEventListener("contextmenu", event => event.preventDefault());
