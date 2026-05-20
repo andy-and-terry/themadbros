@@ -1,16 +1,10 @@
-  // After 5 seconds, begin fading out the splash screen.
-  // The "fade-out" class triggers the CSS opacity transition defined in style.css.
+// After 5 seconds, begin fading out the splash screen.
+setTimeout(() => {
+  splash.classList.add("fade-out");
   setTimeout(() => {
-    splash.classList.add("fade-out");
+    splash.style.display = "none";
+    main.style.opacity = "1";
+  }, 2000);
+}, 5000);
 
-    // After the CSS fade-out transition completes (2s as per style.css),
-    // fully hide the splash element and reveal the main content.
-    setTimeout(() => {
-      splash.style.display = "none";
-      main.style.opacity = "1";
-    }, 2000); // matches the `transition: opacity 2s ease` on #splash in style.css
-  }, 5000); // wait 5 seconds before starting the fade
-};
-
-// Disable the right-click context menu to discourage easy asset copying
 document.addEventListener("contextmenu", event => event.preventDefault());
